@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные с этой сборкой.
-[assembly: AssemblyTitle("Solution 3")]
+[assembly: AssemblyTitle("Solution 3 Еуые")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Solution 3")]
+[assembly: AssemblyProduct("Solution 3 Еуые")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID представляет идентификатор typelib, если этот проект доступен из модели COM
-[assembly: Guid("cff6ceae-ab6e-4f99-b7db-4de891f8b2c8")]
+[assembly: Guid("1b76afaf-78bc-4011-9af6-4395ab5341c6")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

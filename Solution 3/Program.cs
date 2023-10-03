@@ -1,38 +1,93 @@
 ﻿using System;
+using System.Collections.Generic;
 
+// Делегат для выполнения задачи 
+delegate void TaskDelegate(string taskName);
 namespace Solution_3
 {
-    // Делегат для задачи
-    public delegate void TaskDelegate(string task);
-
-    public class Program
+    class Program
     {
-        // Метод для отправки уведомления
-        public static void SendNotification(string task)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Отправка уведомления о выполнении задачи: " + task);
+            List<TaskItem> tasks = new List<TaskItem>();
+
+            while (true)
+            {
+                Console.WriteLine("Выберите действие:");
+                Console.WriteLine("1. Добавить задачу");
+                Console.WriteLine("2. Выполнить задачи");
+                Console.WriteLine("3. Выход");
+
+                string choice = Console.ReadLine();
+
+                if (choice == "3")
+                {
+                    break;
+                }
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.Write("Введите название задачи: ");
+                        string taskName = Console.ReadLine();
+                        Console.WriteLine("Выберите действие для задачи:");
+                        Console.WriteLine("1. Отправить уведомление");
+                        Console.WriteLine("2. Записать в журнал");
+                        string actionChoice = Console.ReadLine();
+                        TaskDelegate taskDelegate = null;
+
+                        switch (actionChoice)
+                        {
+                            case "1":
+                                taskDelegate = SendNotification;
+                                break;
+                            case "2":
+                                taskDelegate = WriteToLog;
+                                break;
+                            default:
+                                Console.WriteLine("Некорректный выбор действия.");
+                                break;
+                        }
+
+                        if (taskDelegate != null)
+                        {
+                            tasks.Add(new TaskItem(taskName, taskDelegate));
+                            Console.WriteLine($"Задача '{taskName}' добавлена.");
+                        }
+                        break;
+
+                    case "2":
+                        if (tasks.Count == 0)
+                        {
+                            Console.WriteLine("Нет задач для выполнения.");
+                        }
+                        else
+                        {
+                            foreach (var task in tasks)
+                            {
+                                Console.WriteLine($"Выполнение задачи: {task.Name}");
+                                task.TaskHandler(task.Name);
+                                Console.WriteLine();
+                            }
+                            tasks.Clear();
+                        }
+                        break;
+
+                    default:
+                        Console.WriteLine("Некорректный выбор. Пожалуйста, выберите действие из списка.");
+                        break;
+                }
+            }
         }
 
-        // Метод для записи в журнал
-        public static void LogTask(string task)
+        static void SendNotification(string taskName)
         {
-            Console.WriteLine("Задача ведения журнала: " + task);
+            Console.WriteLine($"Отправка уведомления для задачи '{taskName}'");
         }
 
-        public static void Main(string[] args)
+        static void WriteToLog(string taskName)
         {
-            TaskManager taskManager = new TaskManager();
-
-            // Добавление делегатов
-            taskManager.AddTaskDelegate(SendNotification);
-            taskManager.AddTaskDelegate(LogTask);
-            taskManager.AddTaskDelegate(LogTask);
-
-            // Пример задачи
-            string task = "Полное задание";
-    
-            // Выполнение задачи с использованием добавленных делегатов
-            taskManager.ExecuteTask(task);
+            Console.WriteLine($"Запись в журнал для задачи '{taskName}'");
         }
     }
 }
